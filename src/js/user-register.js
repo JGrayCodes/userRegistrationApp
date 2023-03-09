@@ -17,24 +17,22 @@ console.log(userTabs);
 /* --- Nav references --- */
 
 // The "users-tab-button" is the one that links to the "Register Users" tab
-const usersTabButton = document.getElementById("users-tab-button")
-console.log(usersTabButton);  
+const usersTabButton = document.getElementById("users-tab-button");
+console.log(usersTabButton);
 
 // The "register-tab-button" is the one that links to the "View User List" tab
-const registerTabButton = document.getElementById("register-tab-button")
+const registerTabButton = document.getElementById("register-tab-button");
 console.log(registerTabButton);
-
 
 /* --- Form field references --- */
 
-const registerForm = document.getElementById("register-form")
-const registerFirstName = document.getElementById("firstname")
-const registerLastName = document.getElementById("lastname")
-const registerUserName = document.getElementById("username")
-const registerEmail = document.getElementById("email")
-const registerPassword = document.getElementById("password")
-const registerSubmit = document.getElementById("register-submit")
-
+const registerForm = document.getElementById("register-form");
+const registerFirstName = document.getElementById("firstname");
+const registerLastName = document.getElementById("lastname");
+const registerUserName = document.getElementById("username");
+const registerEmail = document.getElementById("email");
+const registerPassword = document.getElementById("password");
+const registerSubmit = document.getElementById("register-submit");
 
 /* --- Table list reference --- */
 
@@ -42,19 +40,32 @@ const userList = document.getElementById("user-list");
 const userListHeader = document.getElementsByClassName("header");
 const userListEntry = document.getElementsByClassName("entry");
 
-
 /* ----------------------------------------------------
     Functionality
 ---------------------------------------------------- */
 
 const showUsers = () => {
-    userTabs[0].style.display = "block";
-    registerTab[0].style.display = "none";
-    userTabs[1].style.display = "block";
-    registerTab[1].style.display = "none";
-}
+  userTabs[0].style.display = "block";
+  registerTab[0].style.display = "none";
+  userTabs[1].style.display = "block";
+  registerTab[1].style.display = "none";
+};
+
+const showRegForm = () => {
+  userTabs[0].style.display = "none";
+  registerTab[0].style.display = "block";
+  userTabs[1].style.display = "none";
+  registerTab[1].style.display = "block";
+};
 
 /* ----------------------------------------------------
     Event Listeners and Interactivity
 ---------------------------------------------------- */
-registerTabButton.addEventListener("click", showUsers);
+
+registerSubmit.addEventListener("click", function (event) {
+  event.preventDefault()
+ });
+ registerSubmit.addEventListener("click", showUsers);
+ registerTabButton.addEventListener("click", showUsers);
+
+usersTabButton.addEventListener("click", showRegForm);

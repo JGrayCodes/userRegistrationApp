@@ -58,14 +58,47 @@ const showRegForm = () => {
   registerTab[1].style.display = "block";
 };
 
+/* Create array of users*/
+
+// Create empty array called "users"""
+const users = [];
+
+const createUser = () => {
+  // Get String values of variables from the form fields:
+  const regFirstName = registerFirstName.value;
+  const regLastName = registerLastName.value;
+  const regUserName = registerUserName.value;
+  const regEmail = registerEmail.value;
+  const regPassword = registerPassword.value;
+  // Check to see that the values have been passed to the variables:
+  console.log(regFirstName);
+  // Create newUser variable object:
+  const newUser = {
+    firstName: regFirstName,
+    lastName: regLastName,
+    userName: regUserName,
+    email: regEmail,
+    password: regPassword,
+  };
+  // Check that all input variables have been passed to the newUser object
+  console.log(newUser);
+  // Add the "newUser" object to the "users" array
+  users.push(newUser);
+  // Check that the newUser object has been passed into the "users" array
+  console.log(users[0].firstName);
+};
+
+
 /* ----------------------------------------------------
     Event Listeners and Interactivity
 ---------------------------------------------------- */
 
 registerSubmit.addEventListener("click", function (event) {
-  event.preventDefault()
- });
- registerSubmit.addEventListener("click", showUsers);
- registerTabButton.addEventListener("click", showUsers);
+  event.preventDefault();
+});
+registerSubmit.addEventListener("click", showUsers);
+registerSubmit.addEventListener("click", createUser);
+
+registerTabButton.addEventListener("click", showUsers);
 
 usersTabButton.addEventListener("click", showRegForm);

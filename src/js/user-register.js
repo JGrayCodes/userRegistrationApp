@@ -40,9 +40,15 @@ const userList = document.getElementById("user-list");
 const userListHeader = document.getElementsByClassName("header");
 const userListEntry = document.getElementsByClassName("entry");
 
+/* --- Create global variable: empty array called "users" --- */
+
+const users = [];
+
 /* ----------------------------------------------------
     Functionality
 ---------------------------------------------------- */
+
+/* --- Create function to show tab of registered users --- */
 
 const showUsers = () => {
   userTabs[0].style.display = "block";
@@ -51,6 +57,8 @@ const showUsers = () => {
   registerTab[1].style.display = "none";
 };
 
+/* --- Create function to show registration form tab --- */
+
 const showRegForm = () => {
   userTabs[0].style.display = "none";
   registerTab[0].style.display = "block";
@@ -58,10 +66,7 @@ const showRegForm = () => {
   registerTab[1].style.display = "block";
 };
 
-/* Create array of users*/
-
-// Create empty array called "users"""
-const users = [];
+/* --- Create function to create user object and push to "users" array --- */
 
 const createUser = () => {
   // Get String values of variables from the form fields:
@@ -84,16 +89,14 @@ const createUser = () => {
   console.log(newUser);
   // Add the "newUser" object to the "users" array
   users.push(newUser);
-  // Check that the newUser object has been passed into the "users" array
-  console.log(users);
-
-
-  // Need to take this line out when doing the function of 
-  createUserElement(newUser)
+  // Pass the "users" array to the "populateUserList" function
+  populateUserList(users);
 };
 
+/* --- Create function to create user element to be displayed in the DOM --- */
+
 const createUserElement = (userParam) => {
-  const userDisplay = `
+  let userDisplay = `
     <li class="entry">
         <span> ${userParam.userName} </span> 
         <span> ${userParam.firstName} </span> 
@@ -102,12 +105,19 @@ const createUserElement = (userParam) => {
         <span> ${userParam.password} </span> 
     </li>
     `;
-    
+
+  return userDisplay;
+};
+
+/* --- Create function to to create a DOM element for each individual user 
+                       inside your “users” array --- */
+
+const populateUserList = (usersArrayParam) => {
+  userList.innerHTML = "";
+  for (i = 0; i < usersArrayParam.length; i++) {
+    let userDisplay = createUserElement(users[i]);
     userList.innerHTML += userDisplay;
-
-    return userDisplay;
-
-
+  }
 };
 
 /* ----------------------------------------------------
@@ -117,8 +127,9 @@ const createUserElement = (userParam) => {
 registerSubmit.addEventListener("click", function (event) {
   event.preventDefault();
 });
-registerSubmit.addEventListener("click", showUsers);
 registerSubmit.addEventListener("click", createUser);
+registerSubmit.addEventListener("click", showUsers);
+// registerSubmit.addEventListener("click", );
 
 registerTabButton.addEventListener("click", showUsers);
 

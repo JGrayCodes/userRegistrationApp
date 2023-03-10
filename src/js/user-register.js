@@ -85,9 +85,30 @@ const createUser = () => {
   // Add the "newUser" object to the "users" array
   users.push(newUser);
   // Check that the newUser object has been passed into the "users" array
-  console.log(users[0].firstName);
+  console.log(users);
+
+
+  // Need to take this line out when doing the function of 
+  createUserElement(newUser)
 };
 
+const createUserElement = (userParam) => {
+  const userDisplay = `
+    <li class="entry">
+        <span> ${userParam.userName} </span> 
+        <span> ${userParam.firstName} </span> 
+        <span> ${userParam.lastName} </span> 
+        <span> ${userParam.email} </span> 
+        <span> ${userParam.password} </span> 
+    </li>
+    `;
+    
+    userList.innerHTML += userDisplay;
+
+    return userDisplay;
+
+
+};
 
 /* ----------------------------------------------------
     Event Listeners and Interactivity

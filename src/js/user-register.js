@@ -135,3 +135,9 @@ registerSubmit.addEventListener("click", showUsers);
 registerTabButton.addEventListener("click", showUsers);
 
 usersTabButton.addEventListener("click", showRegForm);
+
+const element = document.getElementById("user-list");
+  element.addEventListener("dblclick", () => {
+    element.remove();
+  });
+

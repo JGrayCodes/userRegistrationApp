@@ -38,7 +38,6 @@ const registerSubmit = document.getElementById("register-submit");
 
 const userList = document.getElementById("user-list");
 const userListHeader = document.getElementsByClassName("header");
-const userListEntry = document.getElementsByClassName("entry");
 
 /* --- Create global variable: empty array called "users" --- */
 
@@ -113,8 +112,9 @@ const createUserElement = (userParam) => {
                        inside your “users” array --- */
 
 const populateUserList = (usersArrayParam) => {
-  userList.innerHTML = "";
-  for (i = 0; i < usersArrayParam.length; i++) {
+  let userListLength = document.getElementsByClassName("entry").length;
+  
+  for (i = userListLength; i < usersArrayParam.length; i++) {
     let userDisplay = createUserElement(users[i]);
     userList.innerHTML += userDisplay;
   }

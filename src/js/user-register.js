@@ -95,9 +95,9 @@ const createUser = () => {
 
 /* --- Create function to create user element to be displayed in the DOM --- */
 
-const createUserElement = (userParam) => {
+const createUserElement = (userParam, index) => {
   let userDisplay = `
-    <li class="entry">
+    <li class="entry" data-index="${index}">
         <span> ${userParam.userName} </span> 
         <span> ${userParam.firstName} </span> 
         <span> ${userParam.lastName} </span> 
@@ -113,13 +113,34 @@ const createUserElement = (userParam) => {
                        inside your “users” array --- */
 
 const populateUserList = (usersArrayParam) => {
-  let userListLength = userListEntry.length;
 
-  for (i = userListLength; i < usersArrayParam.length; i++) {
-    let userDisplay = createUserElement(users[i]);
+  Array.from(userListEntry).forEach((el) => {
+    el.remove();
+})
+
+  for (i = 0; i < usersArrayParam.length; i++) {
+    let userDisplay = createUserElement(users[i], i);
     userList.innerHTML += userDisplay;
   }
+
+  // Update data-index attributes
+  listElements = document.getElementsByClassName("entry");
+  Array.from(listElements).forEach((el, index) => {
+      el.setAttribute("data-index", index);
+      el.addEventListener("dblclick", (event) => {
+          removeUser(event, index);
+      });
+  });
 };
+
+function removeUser(event, index) {
+  const entry = event.target.parentNode;
+  users.splice(index, 1);
+  entry.parentNode.removeChild(entry);
+  populateUserList(users);
+
+  console.log(users);
+}
 
 /* ----------------------------------------------------
     Event Listeners and Interactivity
@@ -136,10 +157,10 @@ registerTabButton.addEventListener("click", showUsers);
 
 usersTabButton.addEventListener("click", showRegForm);
 
-const element = document.getElementById("user-list");
-// Add event listener to user list element
-element.addEventListener("dblclick", () => {
-  // Remove the entry from the DOM
-  element.removeChild(element.children[1]);
-});
+// const element = document.getElementById("user-list");
+// // Add event listener to user list element
+// element.addEventListener("dblclick", () => {
+//   // Remove the entry from the DOM
+//   element.removeChild(element.children[1]);
+// });
 
